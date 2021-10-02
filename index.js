@@ -5,24 +5,24 @@ const ejecutar = () =>{
         if(opc == "empleado"){
             let opc_2 = prompt("Desea saber su total de ventas o modificar el menú \n (1)Total (2)Modificar menú")
                 if(opc_2 == 1){
+                
+                }else if(opc_2 == 2){
                     let opc_3 = prompt("(1)Añadir (2)Eliminar")
                     if(opc_3 == 1){
                         comida = prompt("Ingrese el nobre de la comida")
                         precio= prompt("Ingrese el precio de la comida")
-                        id= prompt("Ingrese el Id de la comida")
-                        editar_añadir(comida, precio, id)
+                        editar_añadir(comida, precio)
+                        show_menu()
                     }else if(opc_3 == 2){
                         show_menu()
                         id = prompt("Ingrese el Id de la comida")
                         editar_eliminar(id)
                     }
-
-                }else if(opc_2 == 2){
-
                 }
 
         }else if(opc == "cliente"){
-            terminar = false   
+            show_menu()
+
         }
         else{
             console.log("Opcion invalida ingresela nuevamente")
@@ -77,6 +77,8 @@ const editar_añadir = (nombre, costo) =>{
 
 const editar_eliminar = (id) =>{
     //El metodo splice remueve un elemento teniendo en cuenta el id del mismo y que el segundo atributo es la cantidad de elementos a remover /
-    let remover = menu.splice(id,1)
+    let remover = menu.splice(id-1,1)
     console.log(menu)
 } 
+
+const precio_producto = menu.find()
