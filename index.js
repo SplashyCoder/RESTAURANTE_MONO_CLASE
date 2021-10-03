@@ -12,9 +12,9 @@ const ejecutar = () =>{
                         comida = prompt("Ingrese el nobre de la comida")
                         precio= prompt("Ingrese el precio de la comida")
                         editar_añadir(comida, precio)
-                        show_menu()
+                        return show_menu(menu ,1)
                     }else if(opc_3 == 2){
-                        show_menu()
+                        return show_menu(menu ,1)
                         id = prompt("Ingrese el Id de la comida")
                         editar_eliminar(id)
                     }
@@ -58,9 +58,13 @@ let menu= [
         id: 5
     }
 ]
-const show_menu = () =>{
-    for(let comida of menu){
-        console.log(`${comida.nombre} - precio ${comida.costo}- id ${comida.id}`)
+const show_menu = (menus, opc = 0) =>{
+    for(let comida of menus){
+        if(opc == 1){
+            console.log(`${comida.nombre} - precio ${comida.costo}- id ${comida.id}`)
+        }else{
+            console.log(`${comida.nombre} - precio ${comida.costo}`)
+        }
     }
 }
 //Arrow function para añadir objetos al menu/
@@ -73,12 +77,36 @@ const editar_añadir = (nombre, costo) =>{
         costo:costo,
         id:pocision+1
     })
+    return show_menu(menu ,0)
 }
 
 const editar_eliminar = (id) =>{
     //El metodo splice remueve un elemento teniendo en cuenta el id del mismo y que el segundo atributo es la cantidad de elementos a remover /
-    let remover = menu.splice(id-1,1)
-    console.log(menu)
+    let remover = menu.splice(id--,1)
+    return show_menu(menu ,0)
 } 
 
-const precio_producto = menu.find()
+const pedido = []
+let costo_pedido = 0
+
+const askForProduct = cod =>{
+    if(!cod) return "Este es un codigo invalido"
+
+    const find_product = menu.find( menu => menu.id === cod)
+    if (!find_product) return "El producto no existe"
+
+    pedido.push(find_product)
+    console.log("El producto se ha agregado al pedido")
+    return show_menu(pedido)
+}
+
+const calcularCosto = () =>{
+    let costo = 0
+    for(producto of pedido){
+        costo += producto.costo
+    }
+    costo_pedido = costo
+    return `El costo de su pedido es de ${costo_pedido}`
+}
+
+
